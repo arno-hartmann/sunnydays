@@ -4,6 +4,7 @@ import requests
 from datetime import date, timedelta, datetime
 import formatting_utils
 
+dynamodb = boto3.resource('dynamodb')
 
 
 def determine_url_for_api(location_id, day_str):
@@ -12,7 +13,6 @@ def determine_url_for_api(location_id, day_str):
 
 
 def get_all_destinations_from_dynamodb():
-    dynamodb = boto3.resource('dynamodb')
     table_destination = dynamodb.Table('destination')
     response = table_destination.scan()
     data = response['Items']
@@ -34,11 +34,7 @@ def get_all_destinations_from_dynamodb():
 def write_weather_dynamoDB(api_url, location):
     url = requests.get(api_url)
     response = url.json()
-
-    dynamodb = boto3.resource('dynamodb')
-
     table_weather = dynamodb.Table('weather')
-
 
     counter = 0
     for item in response:
