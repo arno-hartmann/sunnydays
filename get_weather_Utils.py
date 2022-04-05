@@ -31,7 +31,7 @@ def get_all_destinations_from_dynamodb():
     return citylist
 
 
-def write_weather_dynamoDB(api_url, location):
+def write_weather_dynamoDB(api_url, location, number):
     url = requests.get(api_url)
     response = url.json()
     table_weather = dynamodb.Table('weather')
@@ -43,7 +43,7 @@ def write_weather_dynamoDB(api_url, location):
         else:
             dict = {
                 'city'  : location,
-                'date'  : counter,
+                'date'  : number+counter,
                 'id'    : response[counter]['id'],
                 'weather_state_name' : response[counter]['weather_state_name'],
                 'weather_state_abbr' : response[counter]['weather_state_abbr'],
