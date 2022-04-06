@@ -14,10 +14,7 @@ def is_date_recent(data):
     day = date.today()
     yesterday = day - timedelta(days = 2)
     t = datetime.strptime(data, "%Y-%m-%dT%H:%M:%S.%fZ")
-    if t.date() > yesterday:
-        return True
-    else:
-        return False
+    return t.date() > yesterday
 
 def make_decimal(data):
     if data:
