@@ -9,19 +9,17 @@ lambda_weather/src/__pycache__
 lambda_weather/lambda_get_weather.tf
 lambda_weather/lambda_weather_function.py
 lambda_weather/variables.tf
-lambda_weather/deployment-package-weather.zip
+lambda_weather/deploy-weather.zip
+lambda_weather/deploy_weather
 
-
-
-test_get_location_from_db.py
 Daily.md
 Destinations.md
 
-import_requests.py
-main.tf
-write_to_dynamodb.py
 
-terraform.sh
+main.tf
+
+
+
 .terraform
 .terraform.lock.hcl
 .terraform.tfstate.lock.info
