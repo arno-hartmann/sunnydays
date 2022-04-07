@@ -1,7 +1,6 @@
 from decimal import *
 import boto3
 import requests
-from datetime import date, timedelta, datetime
 import formatting_utils
 
 dynamodb = boto3.resource('dynamodb')
