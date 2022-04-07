@@ -1,24 +1,15 @@
 .DS_Store
 test.py
 test2.py
-bash.sh
 
 lambda_weather/package
 lambda_weather/src/__pycache__
 
-lambda_weather/lambda_get_weather.tf
-lambda_weather/lambda_weather_function.py
-lambda_weather/variables.tf
 lambda_weather/deploy-weather.zip
 lambda_weather/deploy_weather
 
 Daily.md
 Destinations.md
-
-
-main.tf
-
-
 
 .terraform
 .terraform.lock.hcl
