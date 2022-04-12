@@ -15,10 +15,8 @@ provider "aws" {
 }
 
 
-#HIER ANPASSEN?
 data "aws_caller_identity" "current" {}
 
-#HIER ANPASSEN?
 locals {
   account_id = data.aws_caller_identity.current.account_id
 }
