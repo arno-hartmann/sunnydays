@@ -1,7 +1,6 @@
 from decimal import *
 import boto3
 import requests
-from datetime import date, timedelta, datetime
 import formatting_utils
 
 dynamodb = boto3.resource('dynamodb')
@@ -20,16 +19,8 @@ def get_all_destinations_from_dynamodb():
     while 'LastEvaluatedKey' in response:
         response = table_destination.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
         data.extend(response['Items']) 
-    counter = 0
-    for items in data:
-        cities = {
-            "city" : data[counter]['city'],
-            "city_id" : data[counter]['city_id']
-        }
-        citylist.append(cities)
-        counter+=1
-    return citylist
 
+    return data
 
 def write_weather_dynamoDB(api_url, location, number):
     url = requests.get(api_url)

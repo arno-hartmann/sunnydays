@@ -1,15 +1,16 @@
 .DS_Store
 test.py
 test2.py
-test_get_location_from_db.py
+
+lambda_weather/package
+lambda_weather/src/__pycache__
+
+lambda_weather/deploy-weather.zip
+lambda_weather/deploy_weather
+
 Daily.md
 Destinations.md
 
-import_requests.py
-main.tf
-write_to_dynamodb.py
-
-terraform.sh
 .terraform
 .terraform.lock.hcl
 .terraform.tfstate.lock.info
