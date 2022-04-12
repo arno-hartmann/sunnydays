@@ -3,7 +3,6 @@
 
 
 pip3 install --target ./package requests
-#pip3 install --target ./package datetime
 
 
 cd package
