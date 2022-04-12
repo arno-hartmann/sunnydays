@@ -9,7 +9,6 @@ def get_weather_from_api():
     cities=[]
     cities = get_weather_utils.get_all_destinations_from_dynamodb()
 
-    #counter = 0
     for item in cities:
         for x in range(1,4):
             day = today + timedelta( days = x)
