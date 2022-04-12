@@ -15,10 +15,8 @@ provider "aws" {
 }
 
 
-#HIER ANPASSEN?
 data "aws_caller_identity" "current" {}
 
-#HIER ANPASSEN?
 locals {
   account_id = data.aws_caller_identity.current.account_id
 }
@@ -63,8 +61,10 @@ resource "aws_dynamodb_table" "weather" {
   hash_key       = "city"
   range_key      = "date"
 
+
   stream_enabled = true
   stream_view_type = "NEW_IMAGE"
+
 
   attribute {
     name = "city"
