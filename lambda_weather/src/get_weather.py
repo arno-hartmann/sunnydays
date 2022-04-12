@@ -17,4 +17,3 @@ def get_weather_from_api():
             api_url = get_weather_utils.determine_url_for_api(item['city_id'], day_str)
 
             get_weather_utils.write_weather_dynamoDB(api_url, item['city'], x*100)
-    #   counter+=1
