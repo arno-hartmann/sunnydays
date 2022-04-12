@@ -1,15 +1,16 @@
 .DS_Store
+__pycache__
 test.py
 test2.py
-
-lambda_weather/package
-lambda_weather/src/__pycache__
-
-lambda_weather/deploy-weather.zip
-lambda_weather/deploy_weather
-
+test_new_api.py
 Daily.md
 Destinations.md
+
+lambda_weather/src/__pycache__
+
+lambda_weather/src/__pycache__
+lambda_weather/package
+lambda_weather/deploy-weather.zip
 
 .terraform
 .terraform.lock.hcl
@@ -17,4 +18,4 @@ Destinations.md
 terraform.tfstate
 terraform.tfstate.backup
 
-__pycache__
+

@@ -8,6 +8,6 @@ terraform apply
 
 cd lambda_weather
 rm -rf package
-rm -rf deploy-weather.zip
+#rm -rf deploy-weather.zip
 cd ..
 pwd
