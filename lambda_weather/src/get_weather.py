@@ -13,8 +13,6 @@ def get_weather_from_api():
         for x in range(1,4):
             day = today + timedelta( days = x)
             day_str = formatting_utils.maketimestring(day)
-        #    api_url = get_weather_utils.determine_url_for_api(cities[counter]['city_id'], day_str)
-        #    get_weather_utils.write_weather_dynamoDB(api_url, cities[counter]['city'], x*100)
         
             api_url = get_weather_utils.determine_url_for_api(item['city_id'], day_str)
 
