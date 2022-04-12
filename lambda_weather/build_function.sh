@@ -1,6 +1,4 @@
 #!/bin/bash
-#Todocp Python-Files to lambda_weather/
-#pip3 install --target ./package decimal
 
 
 
