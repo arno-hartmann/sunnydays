@@ -22,6 +22,17 @@ locals {
 }
 
 
+resource "aws_dynamodb_table_item" "destination" {
+  table_name = aws_dynamodb_table.destination.name
+  hash_key   = aws_dynamodb_table.destination.hash_key
+  range_key   = aws_dynamodb_table.destination.range_key
+  item = <<ITEM
+{
+  "city": {"S": "London"},
+  "city_id": {"S": "44418"}
+}
+ITEM
+}
 resource "aws_dynamodb_table" "destination" {
   name           = "destination"
   billing_mode   = "PROVISIONED"
@@ -42,10 +53,6 @@ resource "aws_dynamodb_table" "destination" {
 }
 
 
-
-
-
-
 resource "aws_dynamodb_table" "weather" {
   name           = "weather"
   billing_mode   = "PROVISIONED"
@@ -53,6 +60,10 @@ resource "aws_dynamodb_table" "weather" {
   write_capacity = 20
   hash_key       = "city"
   range_key      = "date"
+
+
+  stream_enabled = true
+  stream_view_type = "NEW_IMAGE"
 
 
   attribute {
@@ -67,7 +78,6 @@ resource "aws_dynamodb_table" "weather" {
 }
 
 
-#LAMBDA
 module "lambda_weather" {
   source = "./lambda_weather"
   lambda_role = join("" , ["arn:aws:iam::", local.account_id, ":role/LabRole"] )
