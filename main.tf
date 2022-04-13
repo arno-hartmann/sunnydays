@@ -28,8 +28,8 @@ resource "aws_dynamodb_table_item" "destination" {
   range_key   = aws_dynamodb_table.destination.range_key
   item = <<ITEM
 {
-  "city": {"S": "London"},
-  "city_id": {"S": "44418"}
+  "city": {"S": "Athen"},
+  "city_id": {"S": "946738"}
 }
 ITEM
 }
@@ -40,6 +40,9 @@ resource "aws_dynamodb_table" "destination" {
   write_capacity = 20
   hash_key       = "city"
   range_key      = "city_id"
+
+  stream_enabled = true
+  stream_view_type = "NEW_IMAGE"
 
   attribute {
     name = "city"
@@ -77,9 +80,35 @@ resource "aws_dynamodb_table" "weather" {
   }
 }
 
+resource "aws_dynamodb_table" "sunny" {
+  name           = "sunny"
+  billing_mode   = "PROVISIONED"
+  read_capacity  = 20
+  write_capacity = 20
+  hash_key       = "city"
+  #range_key      = "date"
+
+
+  stream_enabled = true
+  stream_view_type = "NEW_IMAGE"
+
+
+  attribute {
+    name = "city"
+    type = "S"
+  }
+}
+
+
 
 module "lambda_weather" {
   source = "./lambda_weather"
   lambda_role = join("" , ["arn:aws:iam::", local.account_id, ":role/LabRole"] )
   weather_table_name = aws_dynamodb_table.weather.name
+}
+
+resource "aws_lambda_event_source_mapping" "lambda_get_weather_sm" {
+  event_source_arn  = aws_dynamodb_table.destination.stream_arn
+  function_name     = module.lambda_weather.write_to_dynamodb_lambda.arn
+  starting_position = "LATEST"
 }
