@@ -1,0 +1,85 @@
+import boto3
+from boto3.dynamodb.conditions import Key, Attr
+from statistics import mode, multimode
+
+dynamodb = boto3.resource('dynamodb')
+
+def score_weather(weather_state_abbr):
+    scoring = {
+        "c" : 3,
+        "lc": 1,
+        "sn": -9,
+        "sl" : -9,
+        "h" : -9,
+        "t" : -9,
+        "hr" : -9,
+        "lr" : -9,
+        "s" : -9,
+        "hc" : -9,
+        }
+    weather_score = scoring[weather_state_abbr]   
+    return weather_score 
+
+
+
+def make_list_of_forecasts(city):
+    table_sunny = dynamodb.Table('weather')
+    response = table_sunny.query(
+        KeyConditionExpression = Key('city').eq(city)
+    )
+    items = response['Items']
+    day1 = []
+    day2 = []
+    day3 = []
+    day4 = []
+    
+    for item in items:
+
+        if item['date'] in range (100, 200):
+            day1.append(item['weather_state_abbr'])
+      
+        elif item['date'] in range (200, 300):
+            day2.append(item['weather_state_abbr'])
+        
+        elif item['date'] in range (300, 400):
+            day3.append(item['weather_state_abbr'])
+        
+    days = [day1, day2, day3]
+    return days
+
+
+
+def weather_rating(city):
+    days = make_list_of_forecasts(city)
+    weather_indicator = []
+    weather_score = 0
+
+    for y in range (0, 3):
+        weather_indicator.append(mode(days[y]))
+        weather_score += score_weather(weather_indicator[y])
+    return weather_score
+
+
+def get_all_destinations_from_dynamodb():
+    table_destination = dynamodb.Table('destination')
+    response = table_destination.scan()
+    data = response['Items']
+
+    while 'LastEvaluatedKey' in response:
+        response = table_destination.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
+        data.extend(response['Items']) 
+
+    return data
+
+def write_scoring_to_dynamodb(city, city_id, scoring):
+    table_destination = dynamodb.Table('destination')
+    table_destination.update_item(
+        Key={
+            'city': city,
+            'city_id': city_id,
+        },
+        UpdateExpression='SET weather_score = :val1',
+        ExpressionAttributeValues={
+            ':val1': scoring
+        }
+    )
