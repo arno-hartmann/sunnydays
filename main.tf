@@ -26,13 +26,8 @@ resource "aws_dynamodb_table_item" "destination" {
   table_name = aws_dynamodb_table.destination.name
   hash_key   = aws_dynamodb_table.destination.hash_key
   range_key   = aws_dynamodb_table.destination.range_key
-  item = <<ITEM
-{
-  "city": {"S": "Athen"},
-  "city_id": {"S": "946738"}
 }
-ITEM
-}
+
 resource "aws_dynamodb_table" "destination" {
   name           = "destination"
   billing_mode   = "PROVISIONED"
@@ -100,7 +95,6 @@ resource "aws_dynamodb_table" "sunny" {
 }
 
 
-
 module "lambda_weather" {
   source = "./lambda_weather"
   lambda_role = join("" , ["arn:aws:iam::", local.account_id, ":role/LabRole"] )
@@ -111,4 +105,28 @@ resource "aws_lambda_event_source_mapping" "lambda_get_weather_sm" {
   event_source_arn  = aws_dynamodb_table.destination.stream_arn
   function_name     = module.lambda_weather.write_to_dynamodb_lambda.arn
   starting_position = "LATEST"
+}
+
+resource "aws_cloudwatch_event_rule" "time_to_get_weather" {
+  name        = "time_to_get_weather"
+  description = "Get Lamda get_weather twice a day"
+  schedule_expression = var.schedule_expression
+}
+resource "aws_cloudwatch_event_target" "lambda_get_weather_cw" {
+  rule      = aws_cloudwatch_event_rule.time_to_get_weather.name
+  target_id = "call_lambda_weather"
+  arn       = module.lambda_weather.write_to_dynamodb_lambda.arn
+}
+
+variable "schedule_expression" {
+  default     = "cron(25 6 * * ? *)"
+  description = "the aws cloudwatch event rule scheule expression that specifies when the scheduler runs. Default is 5 minuts past the hour. for debugging use 'rate(5 minutes)'. See https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html"
+}
+
+resource "aws_lambda_permission" "allow_cloudwatch_to_call_lambda" {
+    statement_id = "AllowExecutionFromCloudWatch"
+    action = "lambda:InvokeFunction"
+    function_name = module.lambda_weather.write_to_dynamodb_lambda.arn
+    principal = "events.amazonaws.com"
+    source_arn = aws_cloudwatch_event_rule.time_to_get_weather.arn
 }
