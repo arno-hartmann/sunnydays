@@ -18,6 +18,7 @@ for item in cities:
     dict = {
         'city' : item['city'],
         'city_id' : item['city_id'],
-        'airport' : item['airport']
+        'airport' : item['airport'],
+        'weather_score' : 0
     }
     table_destination.put_item(Item=dict)
