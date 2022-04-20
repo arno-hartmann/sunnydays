@@ -21,13 +21,6 @@ locals {
   account_id = data.aws_caller_identity.current.account_id
 }
 
-
-resource "aws_dynamodb_table_item" "destination" {
-  table_name = aws_dynamodb_table.destination.name
-  hash_key   = aws_dynamodb_table.destination.hash_key
-  range_key   = aws_dynamodb_table.destination.range_key
-}
-
 resource "aws_dynamodb_table" "destination" {
   name           = "destination"
   billing_mode   = "PROVISIONED"
