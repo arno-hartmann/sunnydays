@@ -21,31 +21,36 @@ def score_weather(weather_state_abbr):
     return weather_score 
 
 
-
-def make_list_of_forecasts(city):
+def make_list_of_forecasts_one_day(city, min, max):
     table_sunny = dynamodb.Table('weather')
     response = table_sunny.query(
-        KeyConditionExpression = Key('city').eq(city)
-    )
-    items = response['Items']
-    day1 = []
-    day2 = []
-    day3 = []
-    day4 = []
-    
-    for item in items:
 
-        if item['date'] in range (100, 200):
-            day1.append(item['weather_state_abbr'])
-      
-        elif item['date'] in range (200, 300):
-            day2.append(item['weather_state_abbr'])
-        
-        elif item['date'] in range (300, 400):
-            day3.append(item['weather_state_abbr'])
-        
-    days = [day1, day2, day3]
-    return days
+        KeyConditionExpression='city=:city AND #date between :min AND :max',
+
+        ExpressionAttributeValues={
+            ':city': city,
+            ':min': min,
+            ':max': max
+                },
+        ExpressionAttributeNames={
+            '#date': 'date'
+        }
+        )['Items']
+    weather_list = []
+
+    for item in response:
+        weather_list.append(item['weather_state_abbr'])
+    return(weather_list)
+
+
+def make_list_of_forecasts(city):
+    forecastlist = []
+    for x in range (1, 4):
+        min = x*100
+        max = min+100
+
+        forecastlist.append(make_list_of_forecasts_one_day(city,min,max))
+    return forecastlist
 
 
 
