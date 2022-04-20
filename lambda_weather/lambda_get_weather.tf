@@ -15,3 +15,8 @@ resource "aws_lambda_function" "write_to_dynamo" {
     }
   }
 }
+
+
+output "write_to_dynamodb_lambda" {
+  value = aws_lambda_function.write_to_dynamo
+}

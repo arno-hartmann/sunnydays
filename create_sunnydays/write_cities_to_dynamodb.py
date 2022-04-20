@@ -1,0 +1,3 @@
+import write_cities_to_dynamodb_utils
+
+write_cities_to_dynamodb_utils.write_cities_to_dynamodb()
