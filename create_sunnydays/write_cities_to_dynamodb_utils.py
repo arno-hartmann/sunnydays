@@ -19,3 +19,4 @@ def write_cities_to_dynamodb():
             'weather_score' : 0
         }
         table_destination.put_item(Item=dict)
+    f.close
