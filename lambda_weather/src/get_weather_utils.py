@@ -15,7 +15,6 @@ def get_all_destinations_from_dynamodb():
     table_destination = dynamodb.Table('destination')
     response = table_destination.scan()
     data = response['Items']
-    citylist=[]
     while 'LastEvaluatedKey' in response:
         response = table_destination.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
         data.extend(response['Items']) 
