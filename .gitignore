@@ -2,8 +2,7 @@
 __pycache__
 
 tests/
-
-trip_planner/
+test_new_api.py
 
 Daily.md
 Destinations.md
@@ -17,7 +16,8 @@ lambda_weather/src/__pycache__
 
 lambda_weather/src/__pycache__
 lambda_weather/package
-lambda_weather/deploy-weather.zip
+
+sunny_weather/src/__pycache__
 
 .terraform
 .terraform.lock.hcl
@@ -25,4 +25,4 @@ lambda_weather/deploy-weather.zip
 terraform.tfstate
 terraform.tfstate.backup
 
-
+*.zip

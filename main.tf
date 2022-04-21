@@ -94,6 +94,13 @@ module "lambda_weather" {
   weather_table_name = aws_dynamodb_table.weather.name
 }
 
+
+module "sunny_weather" {
+  source = "./sunny_weather"
+  lambda_role = join("" , ["arn:aws:iam::", local.account_id, ":role/LabRole"] )
+  weather_table_name = aws_dynamodb_table.weather.name
+  destination_table_name = aws_dynamodb_table.destination.name
+
 resource "aws_lambda_event_source_mapping" "lambda_get_weather_sm" {
   event_source_arn  = aws_dynamodb_table.destination.stream_arn
   function_name     = module.lambda_weather.write_to_dynamodb_lambda.arn
@@ -122,4 +129,5 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_call_lambda" {
     function_name = module.lambda_weather.write_to_dynamodb_lambda.arn
     principal = "events.amazonaws.com"
     source_arn = aws_cloudwatch_event_rule.time_to_get_weather.arn
+
 }
