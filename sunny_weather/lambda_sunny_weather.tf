@@ -12,6 +12,7 @@ resource "aws_lambda_function" "rate_weather" {
   environment {
     variables = {
       WEATHER_TABLE_NAME = var.weather_table_name
+      DESTINATION_TABLE_NAME = var.destination_table_name
     }
   }
 }

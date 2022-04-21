@@ -13,7 +13,7 @@ lambda_weather/deploy-weather.zip
 
 sunny_weather/src/deploy-sunny.zip
 sunny_weather/src/__pycache__
-
+sunny_weather/deploy-sunny.zip
 
 .terraform
 .terraform.lock.hcl

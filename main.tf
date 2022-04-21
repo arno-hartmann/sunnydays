@@ -77,5 +77,5 @@ module "sunny_weather" {
   source = "./sunny_weather"
   lambda_role = join("" , ["arn:aws:iam::", local.account_id, ":role/LabRole"] )
   weather_table_name = aws_dynamodb_table.weather.name
-#  destination_table_name = aws_dynamodb_table.destination.name
+  destination_table_name = aws_dynamodb_table.destination.name
 }

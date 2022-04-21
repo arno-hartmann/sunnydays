@@ -1,6 +1,5 @@
 import boto3
-#from boto3.dynamodb.conditions import Key, Attr
-from statistics import mode, multimode
+from statistics import mode
 
 dynamodb = boto3.resource('dynamodb')
 
@@ -53,6 +52,32 @@ def make_list_of_forecasts(city):
     return forecastlist
 
 
+######### HIER ARBEITEN
+'''
+def modus_weather(list):
+    occurence = {
+        "c" : c,
+        "lc": lc,
+        "sn": sn,
+        "sl" : sl,
+        "h" :h,
+        "t" : t,
+        "hr" : hr,
+        "lr" : lr,
+        "s" : s,
+        "hc" : hc,
+        }
+    
+    ### hier, hier, hier:
+    
+    for item in list:
+        item[]
+    
+
+'''
+
+
+
 
 def weather_rating(city):
     days = make_list_of_forecasts(city)
@@ -63,7 +88,9 @@ def weather_rating(city):
         weather_indicator.append(mode(days[y]))
         weather_score += score_weather(weather_indicator[y])
     return weather_score
+   
 
+###########################
 
 def get_all_destinations_from_dynamodb():
     table_destination = dynamodb.Table('destination')
