@@ -11,6 +11,10 @@ lambda_weather/src/__pycache__
 lambda_weather/package
 lambda_weather/deploy-weather.zip
 
+sunny_weather/src/deploy-sunny.zip
+sunny_weather/src/__pycache__
+
+
 .terraform
 .terraform.lock.hcl
 .terraform.tfstate.lock.info
