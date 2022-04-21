@@ -15,6 +15,7 @@ cd create_sunnydays
 python3 write_cities_to_dynamodb.py
 cd ..
 
+
 cd lambda_weather
 rm -rf package
 rm -rf deploy-weather.zip
@@ -22,5 +23,6 @@ cd ..
 
 cd sunny_weather
 rm -rf package
-rm -rf sunny-weather.zip
-pwd
+rm -rf deploy-sunny.zip
+
+

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 pip3 install --target ./package requests
 
 

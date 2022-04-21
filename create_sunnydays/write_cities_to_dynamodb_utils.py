@@ -10,7 +10,7 @@ table_destination = dynamodb.Table('destination')
 def write_cities_to_dynamodb():
     with open("cities.json", encoding = 'utf-8') as f:
         cities = json.load(f)
-    print(cities)
+
     for item in cities:
         dict = {
             'city' : item['city'],
