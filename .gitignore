@@ -21,4 +21,4 @@ sunny_weather/deploy-sunny.zip
 terraform.tfstate
 terraform.tfstate.backup
 
-
+*.zip

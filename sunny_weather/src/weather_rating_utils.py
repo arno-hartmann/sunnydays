@@ -52,33 +52,6 @@ def make_list_of_forecasts(city):
     return forecastlist
 
 
-######### HIER ARBEITEN
-'''
-def modus_weather(list):
-    occurence = {
-        "c" : c,
-        "lc": lc,
-        "sn": sn,
-        "sl" : sl,
-        "h" :h,
-        "t" : t,
-        "hr" : hr,
-        "lr" : lr,
-        "s" : s,
-        "hc" : hc,
-        }
-    
-    ### hier, hier, hier:
-    
-    for item in list:
-        item[]
-    
-
-'''
-
-
-
-
 def weather_rating(city):
     days = make_list_of_forecasts(city)
     weather_indicator = []
@@ -89,8 +62,6 @@ def weather_rating(city):
         weather_score += score_weather(weather_indicator[y])
     return weather_score
    
-
-###########################
 
 def get_all_destinations_from_dynamodb():
     table_destination = dynamodb.Table('destination')

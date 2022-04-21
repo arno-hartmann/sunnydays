@@ -4,9 +4,7 @@ from weather_rating_utils import weather_rating
 
 
 def weather_rating_to_dynamo():
-    cities = []
     cities = get_all_destinations_from_dynamodb()
-
 
     for item in cities:
         city_weather_rating = weather_rating(item['city'])
