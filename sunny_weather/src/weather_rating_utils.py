@@ -1,5 +1,4 @@
 import boto3
-from statistics import mode
 
 dynamodb = boto3.resource('dynamodb')
 
@@ -19,6 +18,22 @@ def score_weather(weather_state_abbr):
     weather_score = scoring[weather_state_abbr]   
     return weather_score 
 
+
+def modus(list):
+    dict={}
+    for item in list:
+        if item in dict: 
+            dict[item]+=1
+        else: 
+            dict[item]=1
+
+    max = 0
+    max_item = None
+    for item in dict:
+        if dict[item] > max:
+            max = dict[item]
+            max_item = item
+    return max_item
 
 def make_list_of_forecasts_one_day(city, min, max):
     table_sunny = dynamodb.Table('weather')
@@ -58,7 +73,7 @@ def weather_rating(city):
     weather_score = 0
 
     for y in range (0, 3):
-        weather_indicator.append(mode(days[y]))
+        weather_indicator.append(modus(days[y]))
         weather_score += score_weather(weather_indicator[y])
     return weather_score
    
