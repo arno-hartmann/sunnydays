@@ -1,23 +1,17 @@
 .DS_Store
 __pycache__
 
-tests/
-test_new_api.py
 
-Daily.md
-Destinations.md
-
-
-write_cities_to_dynamo.py
-sunny_weather/*
-cloudwatch/*
-
-lambda_weather/src/__pycache__
+*.zip
+*.pem
+modules/ssh-key.tf
 
 lambda_weather/src/__pycache__
 lambda_weather/package
 
 sunny_weather/src/__pycache__
+
+webserver/venv
 
 .terraform
 .terraform.lock.hcl
@@ -25,11 +19,4 @@ sunny_weather/src/__pycache__
 terraform.tfstate
 terraform.tfstate.backup
 
-*.zip
-
-*.pem
-
-webserver/venv
-webserver/hello.py
-
-modules/ssh-key.tf
+tests/
