@@ -2,4 +2,8 @@
 
 {% block content %}
     <h1>{% block title %} Welcome to FlaskBlog {% endblock %}</h1>
+    {% for item in data %}
+    <p> {{ item['city'] }} {{ item['city_id'] }}</p>
+    {% endfor %}
+    
 {% endblock %}
