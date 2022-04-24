@@ -74,13 +74,11 @@ resource "aws_internet_gateway" "sunnydays-gw" {
 
 
 
-
 resource "aws_instance" "webserver" {
   ami = "ami-02b92c281a4d3dc79"
   instance_type = "t2.micro"
   availability_zone = "us-west-2a"
   key_name = aws_key_pair.ssh.key_name
-  #key_name = var.ssh-key.name
   security_groups = [aws_security_group.sunnydays-webserver-sg.id]
   subnet_id = aws_subnet.sunnydays-public-subnet.id
   #iam_instance_profile = "${aws_iam_instance_profile.web-instance-profile.id}"
