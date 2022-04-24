@@ -11,6 +11,9 @@ terraform init
 terraform plan
 terraform apply
 
+sleep 20
+echo "sleeping for 20 seconds"
+
 cd create_sunnydays
 python3 write_cities_to_dynamodb.py
 cd ..
