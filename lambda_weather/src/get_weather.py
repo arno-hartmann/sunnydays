@@ -6,7 +6,6 @@ import get_weather_utils
 def get_weather_from_api():
     today = date.today()
 
-    cities=[]
     cities = get_weather_utils.get_all_destinations_from_dynamodb()
 
     for item in cities:
