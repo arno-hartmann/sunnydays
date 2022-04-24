@@ -26,3 +26,10 @@ terraform.tfstate
 terraform.tfstate.backup
 
 *.zip
+
+*.pem
+
+webserver/venv
+webserver/hello.py
+
+modules/ssh-key.tf
