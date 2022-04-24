@@ -45,6 +45,8 @@ rm -rf webserver.zip
 cd ..
 
 
-aws s3api delete-objects --bucket sunnydays-webserver-zip-holing-s3-neu --delete webserver.zip
+aws s3 rb s3://sunnydays-webserver-zip-holing-s3-neu/ --force
 
-aws s3api delete-bucket --bucket sunnydays-webserver-zip-holing-s3-neu
+#aws s3api delete-objects --bucket sunnydays-webserver-zip-holing-s3-neu --delete webserver.zip
+
+#aws s3api delete-bucket --bucket sunnydays-webserver-zip-holing-s3-neu
