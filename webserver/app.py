@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import boto3
 
+
 dynamodb = boto3.resource('dynamodb')
 
 app = Flask(__name__)

@@ -137,5 +137,5 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_call_lambda" {
 
 module "sunnydays" {
     source = "./modules"
-    #ssh-key = module.ssh-key.ssh.key_name
+    instance_profile =  "LabInstanceProfile"
 }

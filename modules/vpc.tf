@@ -63,15 +63,9 @@ resource "aws_db_subnet_group" "sunnydays-subnets" {
 }
 
 
-
-
-
 resource "aws_internet_gateway" "sunnydays-gw" {
   vpc_id = aws_vpc.sunnydays-vpc.id
 }
-
-
-
 
 
 resource "aws_instance" "webserver" {
@@ -81,8 +75,7 @@ resource "aws_instance" "webserver" {
   key_name = aws_key_pair.ssh.key_name
   security_groups = [aws_security_group.sunnydays-webserver-sg.id]
   subnet_id = aws_subnet.sunnydays-public-subnet.id
-  #iam_instance_profile = "${aws_iam_instance_profile.web-instance-profile.id}"
-
+  iam_instance_profile = var.instance_profile
   user_data = "${file("modules/tf-user-data.sh")}"
 }
 
@@ -103,4 +96,8 @@ resource "aws_route_table" "sunnydays_route_table" {
 resource "aws_route_table_association" "public_subnet" {
   subnet_id = aws_subnet.sunnydays-public-subnet.id
   route_table_id =aws_route_table.sunnydays_route_table.id  
+}
+
+variable "instance_profile" {
+  type = string
 }
