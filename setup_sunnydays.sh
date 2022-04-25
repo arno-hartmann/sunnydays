@@ -45,6 +45,10 @@ rm -rf package
 rm -rf deploy-sunny.zip
 cd ..
 
+cd get_flight
+rm -rf deploy-flight.zip
+cd ..
+
 cd webserver
 rm -rf webserver.zip
 cd ..
