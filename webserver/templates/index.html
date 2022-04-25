@@ -3,7 +3,7 @@
 {% block content %}
     <h1>{% block title %} Willkommen bei sunnydays {% endblock %}</h1>
     {% for item in data %}
-    <p>In {{ item['city'] }} ist in den nächsten drei Tagen gutes Wetter! <a href="""{{ item['url'] }}""">{{ item['city'] }} ab Frankfurt buchen</a></p>
+    <p>In {{ item['city'] }} ist in den nächsten drei Tagen gutes Wetter! <a href={{ item['url'] }}>{{ item['city'] }} ab Frankfurt buchen</a></p>
     {% endfor %}
     
 {% endblock %}
