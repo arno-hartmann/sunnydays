@@ -132,3 +132,10 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_call_lambda" {
     source_arn = aws_cloudwatch_event_rule.time_to_get_weather.arn
 
 }
+
+
+
+module "sunnydays" {
+    source = "./modules"
+    #ssh-key = module.ssh-key.ssh.key_name
+}
