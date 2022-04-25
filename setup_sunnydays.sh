@@ -7,6 +7,10 @@ cd sunny_weather
 sh build_function_sunny.sh
 cd ..
 
+cd get_flight
+sh build_function_flight.sh
+cd ..
+
 cd webserver
 zip -r webserver.zip static/* templates/* app.py run-api.sh
 cd ..
@@ -22,8 +26,9 @@ terraform init
 terraform plan
 terraform apply
 
-sleep 20
 echo "waiting for 20 seconds"
+sleep 20
+
 
 cd create_sunnydays
 python3 write_cities_to_dynamodb.py

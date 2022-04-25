@@ -102,6 +102,13 @@ module "sunny_weather" {
   destination_table_name = aws_dynamodb_table.destination.name
 }
 
+module "get_flight" {
+  source = "./get_flight"
+  lambda_role = join("" , ["arn:aws:iam::", local.account_id, ":role/LabRole"] )
+  destination_table_name = aws_dynamodb_table.destination.name
+  sunny_table_name = aws_dynamodb_table.sunny.name
+}
+
 resource "aws_lambda_event_source_mapping" "lambda_get_weather_sm" {
   event_source_arn  = aws_dynamodb_table.destination.stream_arn
   function_name     = module.lambda_weather.write_to_dynamodb_lambda.arn

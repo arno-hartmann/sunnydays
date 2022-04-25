@@ -18,7 +18,6 @@ def get_all_destinations_from_dynamodb():
     while 'LastEvaluatedKey' in response:
         response = table_destination.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
         data.extend(response['Items']) 
-
     return data
 
 def write_weather_dynamoDB(api_url, location, number):
