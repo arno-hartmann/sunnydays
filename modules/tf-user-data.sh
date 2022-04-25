@@ -1,22 +1,20 @@
 #!/bin/bash
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 yum update -y
+yum install pip -y
 
-
-#aws s3 cp s3://sunnydays-webserver-zip-holing-s3-neu/webserver.zip /home/ec2-user/webserver.zip
-wget https://sunnydays-webserver-zip-holing-s3-neu.s3.us-west-2.amazonaws.com/webserver.zip
 cd /home/ec2-user/
+mkdir webserver
+cd webserver
+aws s3 cp s3://sunnydays-webserver-zip-holing-s3-neu/webserver.zip /home/ec2-user/webserver/webserver.zip
 
 unzip webserver.zip
 
 chown -R ec2-user .
-#sudo python3 -m venv venv
-#sudo . venv/bin/activate
+
+pip3 install boto3
 pip3 install Flask
 
+export AWS_DEFAULT_REGION=us-west-2
 
-export FLASK_APP=app
-export FLASK_ENV=venv
-
-cd webserver
-sudo python3 app.py
+python3 app.py
