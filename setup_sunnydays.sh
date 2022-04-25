@@ -15,10 +15,10 @@ cd webserver
 zip -r webserver.zip static/* templates/* app.py run-api.sh
 cd ..
 
-#aws s3api create-bucket --bucket sunnydays-webserver-zip-holing-s3-neu --region us-west-2 --create-bucket-configuration LocationConstraint=us-west-2
+aws s3api create-bucket --bucket sunnydays-webserver-zip-holing-s3-neu --region us-west-2 --create-bucket-configuration LocationConstraint=us-west-2
 
 echo "waiting for 20 seconds"
-#sleep 20
+sleep 20
 
 aws s3 cp webserver/webserver.zip s3://sunnydays-webserver-zip-holing-s3-neu/webserver.zip --acl public-read-write
 
@@ -50,11 +50,6 @@ rm -rf webserver.zip
 cd ..
 
 
-echo "S3 löschen, wenn's funktioniert hat !!!"
-#aws s3 rb s3://sunnydays-webserver-zip-holing-s3-neu/ --force
+aws s3 rb s3://sunnydays-webserver-zip-holing-s3-neu/ --force
 
-
-#backup, wenn's nicht funktioniert
-#aws s3api delete-objects --bucket sunnydays-webserver-zip-holing-s3-neu --delete webserver.zip
-
-#aws s3api delete-bucket --bucket sunnydays-webserver-zip-holing-s3-neu
+echo "sunnydays is ready"
