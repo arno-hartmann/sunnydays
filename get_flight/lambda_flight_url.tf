@@ -16,3 +16,7 @@ resource "aws_lambda_function" "flight_url" {
     }
   }
 }
+
+output "flight_url_lambda" {
+  value = aws_lambda_function.flight_url
+}
