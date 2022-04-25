@@ -123,7 +123,7 @@ resource "aws_lambda_event_source_mapping" "lambda_get_flight_sm" {
 
 resource "aws_cloudwatch_event_rule" "time_to_get_weather" {
   name        = "time_to_get_weather"
-  description = "Get Lamda get_weather twice a day"
+  description = "Get Lamda get_weather once a day"
   schedule_expression = var.schedule_expression
 }
 resource "aws_cloudwatch_event_target" "lambda_get_weather_cw" {
@@ -145,6 +145,30 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_call_lambda" {
     source_arn = aws_cloudwatch_event_rule.time_to_get_weather.arn
 }
 
+
+resource "aws_cloudwatch_event_rule" "time_to_rate_weather" {
+  name        = "time_to_rate_weather"
+  description = "Get Lamda sunny once a day"
+  schedule_expression = var.schedule_expression_sunny
+}
+resource "aws_cloudwatch_event_target" "lambda_rate_weather_cw" {
+  rule      = aws_cloudwatch_event_rule.time_to_rate_weather.name
+  target_id = "call_sunny_weather"
+  arn       = module.sunny_weather.rate_weather_lambda.arn
+}
+
+variable "schedule_expression_sunny" {
+  default     = "cron(35 6 * * ? *)"
+  description = "the aws cloudwatch event rule scheule expression that specifies when the scheduler runs. Default is 5 minuts past the hour. for debugging use 'rate(5 minutes)'. See https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html"
+}
+
+resource "aws_lambda_permission" "allow_cloudwatch_to_call_lambda_flight" {
+    statement_id = "AllowExecutionFromCloudWatch"
+    action = "lambda:InvokeFunction"
+    function_name = module.sunny_weather.rate_weather_lambda.arn
+    principal = "events.amazonaws.com"
+    source_arn = aws_cloudwatch_event_rule.time_to_rate_weather.arn
+}
 
 
 module "sunnydays" {
