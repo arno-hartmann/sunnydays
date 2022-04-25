@@ -45,8 +45,11 @@ rm -rf webserver.zip
 cd ..
 
 
-aws s3 rb s3://sunnydays-webserver-zip-holing-s3-neu/ --force
+echo "S3 löschen, wenn's funktioniert hat !!!"
+#aws s3 rb s3://sunnydays-webserver-zip-holing-s3-neu/ --force
 
+
+#backup, wenn's nicht funktioniert
 #aws s3api delete-objects --bucket sunnydays-webserver-zip-holing-s3-neu --delete webserver.zip
 
 #aws s3api delete-bucket --bucket sunnydays-webserver-zip-holing-s3-neu
