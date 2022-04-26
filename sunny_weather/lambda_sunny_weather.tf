@@ -16,3 +16,7 @@ resource "aws_lambda_function" "rate_weather" {
     }
   }
 }
+
+output "rate_weather_lambda" {
+  value = aws_lambda_function.rate_weather
+}

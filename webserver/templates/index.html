@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Welcome to FlaskBlog {% endblock %}</h1>
+    <h1>{% block title %} Willkommen bei sunnydays {% endblock %}</h1>
     {% for item in data %}
-    <p> {{ item['city'] }} {{ item['city_id'] }}</p>
+    <p>In {{ item['city'] }} ist in den nächsten drei Tagen gutes Wetter! <a href={{ item['url'] }}>{{ item['city'] }} ab Frankfurt buchen</a></p>
     {% endfor %}
     
 {% endblock %}

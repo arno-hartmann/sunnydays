@@ -7,6 +7,10 @@ cd sunny_weather
 sh build_function_sunny.sh
 cd ..
 
+cd get_flight
+sh build_function_flight.sh
+cd ..
+
 cd webserver
 zip -r webserver.zip static/* templates/* app.py run-api.sh
 cd ..
@@ -22,8 +26,9 @@ terraform init
 terraform plan
 terraform apply
 
-sleep 20
 echo "waiting for 20 seconds"
+sleep 20
+
 
 cd create_sunnydays
 python3 write_cities_to_dynamodb.py
@@ -40,16 +45,15 @@ rm -rf package
 rm -rf deploy-sunny.zip
 cd ..
 
+cd get_flight
+rm -rf deploy-flight.zip
+cd ..
+
 cd webserver
 rm -rf webserver.zip
 cd ..
 
 
-echo "S3 löschen, wenn's funktioniert hat !!!"
-#aws s3 rb s3://sunnydays-webserver-zip-holing-s3-neu/ --force
+aws s3 rb s3://sunnydays-webserver-zip-holing-s3-neu/ --force
 
-
-#backup, wenn's nicht funktioniert
-#aws s3api delete-objects --bucket sunnydays-webserver-zip-holing-s3-neu --delete webserver.zip
-
-#aws s3api delete-bucket --bucket sunnydays-webserver-zip-holing-s3-neu
+echo "sunnydays is ready"

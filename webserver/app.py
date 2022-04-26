@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    table_destination = dynamodb.Table('destination')
+    table_destination = dynamodb.Table('sunny')
     response = table_destination.scan()
     data = response['Items']
 
