@@ -17,7 +17,6 @@ def returndate(start_date, trip_length):
 
 def maketimestring(day):
     return day.strftime("%y%m%d")
-    return date
 
 def get_all_destinations_from_dynamodb():
     table_destination = dynamodb.Table('destination')
