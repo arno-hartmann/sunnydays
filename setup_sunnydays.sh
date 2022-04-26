@@ -17,7 +17,7 @@ cd ..
 
 aws s3api create-bucket --bucket sunnydays-webserver-zip-holing-s3-neu --region us-west-2 --create-bucket-configuration LocationConstraint=us-west-2
 
-echo "waiting for 20 seconds"
+echo "waiting for 20 seconds for S3 to be created"
 sleep 20
 
 aws s3 cp webserver/webserver.zip s3://sunnydays-webserver-zip-holing-s3-neu/webserver.zip --acl public-read-write
@@ -26,7 +26,7 @@ terraform init
 terraform plan
 terraform apply
 
-echo "waiting for 20 seconds"
+echo "waiting for 20 seconds for EC2 to download .zip from S3"
 sleep 20
 
 
